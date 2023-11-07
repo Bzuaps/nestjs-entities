@@ -1,6 +1,7 @@
 const mysql = require('mysql2/promise');
 const fs = require('fs');
 
+const folderName = '';
 const connectionConfig = {
   host: 'localhost',
   user: 'root',
@@ -33,17 +34,17 @@ async function main() {
 
       // Genera el código de la entidad con los decoradores @Column
       const entityCode = `
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+        import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
-@Entity()
-export class ${entityName}{
-    @PrimaryGeneratedColumn()
-    ${columns.map((column) => `@Column({ type: '${column.type}', name: '${column.name}' })\n    ${column.name}: ${column.type};`).join('\n    ')}
-}
-`;
+        @Entity()
+        export class ${entityName}{
+            @PrimaryGeneratedColumn()
+            ${columns.map((column) => `@Column({ type: '${column.type}', name: '${column.name}' })\n    ${column.name}: ${column.type};`).join('\n    ')}
+        }
+        `;
 
       // Define el nombre del archivo (puedes personalizar la estructura de nombres si lo deseas)
-      const fileName = `${entityName}.ts`;
+      const fileName = `${folderName!=""?folderName+'/':''}${entityName}.ts`;
 
       // Escribe el código de la entidad en el archivo
       fs.writeFileSync(fileName, entityCode);
