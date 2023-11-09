@@ -10,6 +10,7 @@ Automatic generator for entities in nestjs, the aim is to speed up development t
 Basis: this generator include a server.js file, you only need add data base connection details, it will read tables and create a new entity file for each table.
 
 v1.00 : Create a basic entity file, it doesnt include relations.
+v1.01 : Include entity relations, default column value added.
 
 
 
